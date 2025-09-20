@@ -8,81 +8,107 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
+    /* PT Jasakula Purwa Luhur Corporate Colors */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 220 13% 18%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 13% 18%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 13% 18%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Corporate Blue Primary */
+    --primary: 213 94% 68%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 213 94% 78%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Professional Secondary */
+    --secondary: 210 11% 96%;
+    --secondary-foreground: 220 13% 18%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 11% 96%;
+    --muted-foreground: 220 9% 46%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Success Green for Attendance */
+    --accent: 142 76% 36%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Warning/Alert Colors */
+    --warning: 43 96% 56%;
+    --warning-foreground: 26 83% 14%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 213 94% 68%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Corporate Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(213 94% 68%), hsl(142 76% 36%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 11% 98%));
+    --gradient-hero: linear-gradient(135deg, hsl(213 94% 68% / 0.1), hsl(142 76% 36% / 0.1));
+
+    /* Shadows */
+    --shadow-corporate: 0 4px 20px hsl(213 94% 68% / 0.15);
+    --shadow-card: 0 2px 10px hsl(220 13% 18% / 0.08);
+    --shadow-floating: 0 8px 30px hsl(220 13% 18% / 0.12);
+
+    /* Animation Timing */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 220 27% 8%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 220 27% 10%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 220 27% 10%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 213 94% 68%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 213 94% 78%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 220 13% 18%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 220 13% 18%;
+    --muted-foreground: 220 9% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 142 76% 36%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --warning: 43 96% 56%;
+    --warning-foreground: 26 83% 14%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 25%;
+    --input: 220 13% 25%;
+    --ring: 213 94% 68%;
+
+    /* Dark mode gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(213 94% 68%), hsl(142 76% 36%));
+    --gradient-card: linear-gradient(180deg, hsl(220 27% 10%), hsl(220 27% 8%));
+    --gradient-hero: linear-gradient(135deg, hsl(213 94% 68% / 0.2), hsl(142 76% 36% / 0.2));
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -101,5 +127,148 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
+}
+
+@layer components {
+  /* Corporate Button Styles */
+  .btn-corporate {
+    @apply bg-gradient-to-r from-primary to-accent text-primary-foreground;
+    @apply hover:shadow-lg hover:scale-105 transition-all duration-300;
+    @apply font-semibold rounded-lg px-6 py-3;
+  }
+
+  .btn-corporate-outline {
+    @apply border-2 border-primary text-primary bg-transparent;
+    @apply hover:bg-primary hover:text-primary-foreground;
+    @apply transition-all duration-300 rounded-lg px-6 py-3 font-semibold;
+  }
+
+  /* Card Styles */
+  .card-corporate {
+    @apply bg-gradient-to-br from-card to-secondary/50;
+    @apply border border-border/50 rounded-xl p-6;
+    @apply shadow-md hover:shadow-lg transition-all duration-300;
+  }
+
+  .card-stats {
+    @apply card-corporate;
+    @apply hover:scale-105 cursor-pointer;
+  }
+
+  /* Real-time Indicators */
+  .status-online {
+    @apply bg-accent text-accent-foreground;
+    @apply px-3 py-1 rounded-full text-sm font-medium;
+    @apply flex items-center gap-2;
+  }
+
+  .status-offline {
+    @apply bg-muted text-muted-foreground;
+    @apply px-3 py-1 rounded-full text-sm font-medium;
+    @apply flex items-center gap-2;
+  }
+
+  /* Pulse Animation for Real-time Updates */
+  .pulse-ring {
+    @apply absolute -inset-1 bg-primary/20 rounded-full animate-ping;
+  }
+
+  .realtime-indicator {
+    @apply relative flex items-center;
+  }
+
+  .realtime-indicator::before {
+    content: '';
+    @apply absolute -inset-1 bg-accent/30 rounded-full animate-pulse;
+  }
+
+  /* QR Code Container */
+  .qr-container {
+    @apply card-corporate max-w-sm mx-auto text-center;
+    @apply bg-gradient-to-br from-background via-secondary/30 to-primary/5;
+  }
+
+  /* Corporate Header */
+  .header-corporate {
+    @apply bg-gradient-to-r from-primary via-primary-glow to-accent;
+    @apply text-primary-foreground shadow-lg;
+  }
+
+  /* Dashboard Grid */
+  .dashboard-grid {
+    @apply grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+  }
+
+  /* Responsive Table */
+  .table-responsive {
+    @apply overflow-x-auto rounded-lg border border-border;
+  }
+
+  /* Loading States */
+  .loading-shimmer {
+    @apply animate-pulse bg-gradient-to-r from-muted via-muted/50 to-muted;
+    @apply rounded-md;
+  }
+
+  /* Toast Success */
+  .toast-success {
+    @apply bg-accent text-accent-foreground border-accent/20;
+  }
+
+  /* Toast Warning */
+  .toast-warning {
+    @apply bg-warning text-warning-foreground border-warning/20;
+  }
+
+  /* Toast Error */
+  .toast-error {
+    @apply bg-destructive text-destructive-foreground border-destructive/20;
+  }
+}
+
+/* Animation Keyframes */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Custom Animation Classes */
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out;
 }

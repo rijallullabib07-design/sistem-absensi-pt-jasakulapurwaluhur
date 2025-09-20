@@ -146,10 +146,18 @@ export function LoginForm() {
             </Button>
           </form>
 
-          <div className="mt-6 text-center">
+          <div className="mt-6 text-center space-y-3">
             <p className="text-sm text-muted-foreground">
               Sistem ini khusus untuk admin PT Jasakula Purwa Luhur
             </p>
+            
+            <div className="bg-muted/50 rounded-lg p-3 border border-border/50">
+              <p className="text-xs font-medium text-foreground mb-2">Kredensial Testing:</p>
+              <div className="space-y-1 text-xs text-muted-foreground">
+                <p><span className="font-medium">Email:</span> admin@jasakula.com</p>
+                <p><span className="font-medium">Password:</span> admin123</p>
+              </div>
+            </div>
           </div>
         </CardContent>
       </Card>

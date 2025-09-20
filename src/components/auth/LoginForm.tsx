@@ -12,7 +12,7 @@ import { Loader2, Lock, Mail } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const loginSchema = z.object({
-  email: z.string().email("Email tidak valid"),
+  username: z.string().min(1, "Username tidak boleh kosong"),
   password: z.string().min(6, "Password minimal 6 karakter"),
 });
 
@@ -20,6 +20,7 @@ type LoginForm = z.infer<typeof loginSchema>;
 
 export function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -35,36 +36,61 @@ export function LoginForm() {
     setIsLoading(true);
     
     try {
-      const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
-        email: data.email,
-        password: data.password,
-      });
+      // Convert username to email format for authentication
+      const email = `${data.username}@jasakula.com`;
+      
+      if (isSignUp) {
+        // Sign up new admin
+        const { data: authData, error: authError } = await supabase.auth.signUp({
+          email: email,
+          password: data.password,
+          options: {
+            emailRedirectTo: `${window.location.origin}/dashboard`
+          }
+        });
 
-      if (authError) throw authError;
+        if (authError) throw authError;
 
-      // Check if user is admin
-      const { data: adminData, error: adminError } = await supabase
-        .from("admin")
-        .select("*")
-        .eq("user_id", authData.user.id)
-        .single();
+        toast({
+          title: "Pendaftaran Berhasil",
+          description: "Admin berhasil didaftarkan dan dapat login sekarang",
+          className: "toast-success",
+        });
 
-      if (adminError || !adminData) {
-        await supabase.auth.signOut();
-        throw new Error("Akses ditolak. Hanya admin yang dapat login.");
+        setIsSignUp(false);
+      } else {
+        // Login existing admin
+        const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+          email: email,
+          password: data.password,
+        });
+
+        if (authError) throw authError;
+
+        // Check if user is admin
+        const { data: adminData, error: adminError } = await supabase
+          .from("admin")
+          .select("*")
+          .eq("user_id", authData.user.id)
+          .single();
+
+        if (adminError || !adminData) {
+          await supabase.auth.signOut();
+          throw new Error("Akses ditolak. Hanya admin yang dapat login.");
+        }
+
+        toast({
+          title: "Login Berhasil",
+          description: `Selamat datang, ${adminData.full_name}!`,
+          className: "toast-success",
+        });
+
+        navigate("/dashboard");
       }
-
-      toast({
-        title: "Login Berhasil",
-        description: `Selamat datang, ${adminData.full_name}!`,
-        className: "toast-success",
-      });
-
-      navigate("/dashboard");
     } catch (error: any) {
       toast({
-        title: "Login Gagal",
-        description: error.message || "Terjadi kesalahan saat login",
+        title: isSignUp ? "Pendaftaran Gagal" : "Login Gagal",
+        description: error.message || `Terjadi kesalahan saat ${isSignUp ? 'pendaftaran' : 'login'}`,
         variant: "destructive",
       });
     } finally {
@@ -81,7 +107,7 @@ export function LoginForm() {
           </div>
           <div>
             <CardTitle className="text-2xl font-bold text-foreground">
-              Login Admin
+              {isSignUp ? "Daftar Admin" : "Login Admin"}
             </CardTitle>
             <CardDescription className="text-muted-foreground">
               PT Jasakula Purwa Luhur - Sistem Absensi Digital
@@ -92,21 +118,21 @@ export function LoginForm() {
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-sm font-medium">
-                Email Admin
+              <Label htmlFor="username" className="text-sm font-medium">
+                Username Admin
               </Label>
               <div className="relative">
                 <Mail className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
                 <Input
-                  id="email"
-                  type="email"
-                  placeholder="admin@jasakula.com"
+                  id="username"
+                  type="text"
+                  placeholder="admin"
                   className="pl-10"
-                  {...register("email")}
+                  {...register("username")}
                 />
               </div>
-              {errors.email && (
-                <p className="text-sm text-destructive">{errors.email.message}</p>
+              {errors.username && (
+                <p className="text-sm text-destructive">{errors.username.message}</p>
               )}
             </div>
 
@@ -138,11 +164,20 @@ export function LoginForm() {
               {isLoading ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Memproses...
+                  {isSignUp ? "Mendaftar..." : "Memproses..."}
                 </>
               ) : (
-                "Login ke Dashboard"
+                isSignUp ? "Daftar Admin" : "Login ke Dashboard"
               )}
+            </Button>
+            
+            <Button
+              type="button"
+              variant="ghost"
+              className="w-full mt-2"
+              onClick={() => setIsSignUp(!isSignUp)}
+            >
+              {isSignUp ? "Sudah punya akun? Login" : "Belum punya akun? Daftar"}
             </Button>
           </form>
 
@@ -154,7 +189,7 @@ export function LoginForm() {
             <div className="bg-muted/50 rounded-lg p-3 border border-border/50">
               <p className="text-xs font-medium text-foreground mb-2">Kredensial Testing:</p>
               <div className="space-y-1 text-xs text-muted-foreground">
-                <p><span className="font-medium">Email:</span> admin@jasakula.com</p>
+                <p><span className="font-medium">Username:</span> admin</p>
                 <p><span className="font-medium">Password:</span> admin123</p>
               </div>
             </div>

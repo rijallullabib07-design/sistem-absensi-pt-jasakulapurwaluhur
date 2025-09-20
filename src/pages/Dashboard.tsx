@@ -171,7 +171,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-hero flex flex-col">
-      <Header user={user} isAdmin={true} />
+      <Header user={user} isAdmin={!!admin} />
       
       <main className="container mx-auto p-4 flex-1">
         <div className="space-y-6">

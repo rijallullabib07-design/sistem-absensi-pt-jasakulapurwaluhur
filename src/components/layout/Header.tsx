@@ -1,4 +1,4 @@
-import { Building2, User, LogOut, QrCode } from "lucide-react";
+import { Building2, User, LogOut, QrCode, Users, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -86,6 +86,14 @@ export function Header({ user, isAdmin }: HeaderProps) {
                 <DropdownMenuItem onClick={() => navigate("/dashboard")}>
                   <Building2 className="w-4 h-4 mr-2" />
                   Dashboard
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate("/employees")}>
+                  <Users className="w-4 h-4 mr-2" />
+                  Karyawan
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate("/reports")}>
+                  <FileText className="w-4 h-4 mr-2" />
+                  Laporan
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => navigate("/scan")}>
                   <QrCode className="w-4 h-4 mr-2" />
